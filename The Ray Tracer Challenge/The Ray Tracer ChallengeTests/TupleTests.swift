@@ -129,7 +129,7 @@ final class TupleTests: XCTestCase {
     
     func testDividingTupleByScalar() {
         let a = Tuple(1, -2, 3, -4)
-        var expected = Tuple(0.5, -1, 1.5, -2)
+        let expected = Tuple(0.5, -1, 1.5, -2)
         XCTAssert(a / 2 == expected)
     }
 

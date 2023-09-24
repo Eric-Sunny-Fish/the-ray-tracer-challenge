@@ -16,6 +16,14 @@
 		07B103142ABA968600257B7B /* The_Ray_Tracer_ChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103132ABA968600257B7B /* The_Ray_Tracer_ChallengeUITestsLaunchTests.swift */; };
 		07B103212ABBD84700257B7B /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103202ABBD84700257B7B /* TupleTests.swift */; };
 		07B103232ABBDCE000257B7B /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103222ABBDCE000257B7B /* Tuple.swift */; };
+		07B103252ABD32E700257B7B /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103242ABD32E700257B7B /* ColorTests.swift */; };
+		07B103272ABD345200257B7B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103262ABD345200257B7B /* Color.swift */; };
+		07B103292ABE63ED00257B7B /* CanvasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103282ABE63ED00257B7B /* CanvasTests.swift */; };
+		07B1032B2ABE65C600257B7B /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1032A2ABE65C600257B7B /* Canvas.swift */; };
+		07B103332ABF9CFB00257B7B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103322ABF9CFB00257B7B /* main.swift */; };
+		07B103372ABF9D6200257B7B /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103222ABBDCE000257B7B /* Tuple.swift */; };
+		07B103382ABF9E5200257B7B /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B1032A2ABE65C600257B7B /* Canvas.swift */; };
+		07B103392ABF9ED600257B7B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B103262ABD345200257B7B /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		07B1032E2ABF9CFB00257B7B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		07B102F22ABA968500257B7B /* The Ray Tracer Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Ray Tracer Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B102F52ABA968500257B7B /* The_Ray_Tracer_ChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Ray_Tracer_ChallengeApp.swift; sourceTree = "<group>"; };
@@ -49,6 +69,12 @@
 		07B103132ABA968600257B7B /* The_Ray_Tracer_ChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Ray_Tracer_ChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		07B103202ABBD84700257B7B /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
 		07B103222ABBDCE000257B7B /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		07B103242ABD32E700257B7B /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
+		07B103262ABD345200257B7B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		07B103282ABE63ED00257B7B /* CanvasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasTests.swift; sourceTree = "<group>"; };
+		07B1032A2ABE65C600257B7B /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		07B103302ABF9CFB00257B7B /* PlotProjectile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PlotProjectile; sourceTree = BUILT_PRODUCTS_DIR; };
+		07B103322ABF9CFB00257B7B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +99,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		07B1032D2ABF9CFB00257B7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,6 +115,7 @@
 				07B102F42ABA968500257B7B /* The Ray Tracer Challenge */,
 				07B103062ABA968600257B7B /* The Ray Tracer ChallengeTests */,
 				07B103102ABA968600257B7B /* The Ray Tracer ChallengeUITests */,
+				07B103312ABF9CFB00257B7B /* PlotProjectile */,
 				07B102F32ABA968500257B7B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +126,7 @@
 				07B102F22ABA968500257B7B /* The Ray Tracer Challenge.app */,
 				07B103032ABA968600257B7B /* The Ray Tracer ChallengeTests.xctest */,
 				07B1030D2ABA968600257B7B /* The Ray Tracer ChallengeUITests.xctest */,
+				07B103302ABF9CFB00257B7B /* PlotProjectile */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,6 +136,8 @@
 			children = (
 				07B102F52ABA968500257B7B /* The_Ray_Tracer_ChallengeApp.swift */,
 				07B103222ABBDCE000257B7B /* Tuple.swift */,
+				07B103262ABD345200257B7B /* Color.swift */,
+				07B1032A2ABE65C600257B7B /* Canvas.swift */,
 				07B102F72ABA968500257B7B /* ContentView.swift */,
 				07B102F92ABA968600257B7B /* Assets.xcassets */,
 				07B102FE2ABA968600257B7B /* The_Ray_Tracer_Challenge.entitlements */,
@@ -122,6 +159,8 @@
 			children = (
 				07B103072ABA968600257B7B /* The_Ray_Tracer_ChallengeTests.swift */,
 				07B103202ABBD84700257B7B /* TupleTests.swift */,
+				07B103242ABD32E700257B7B /* ColorTests.swift */,
+				07B103282ABE63ED00257B7B /* CanvasTests.swift */,
 			);
 			path = "The Ray Tracer ChallengeTests";
 			sourceTree = "<group>";
@@ -133,6 +172,14 @@
 				07B103132ABA968600257B7B /* The_Ray_Tracer_ChallengeUITestsLaunchTests.swift */,
 			);
 			path = "The Ray Tracer ChallengeUITests";
+			sourceTree = "<group>";
+		};
+		07B103312ABF9CFB00257B7B /* PlotProjectile */ = {
+			isa = PBXGroup;
+			children = (
+				07B103322ABF9CFB00257B7B /* main.swift */,
+			);
+			path = PlotProjectile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +238,23 @@
 			productReference = 07B1030D2ABA968600257B7B /* The Ray Tracer ChallengeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		07B1032F2ABF9CFB00257B7B /* PlotProjectile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07B103362ABF9CFB00257B7B /* Build configuration list for PBXNativeTarget "PlotProjectile" */;
+			buildPhases = (
+				07B1032C2ABF9CFB00257B7B /* Sources */,
+				07B1032D2ABF9CFB00257B7B /* Frameworks */,
+				07B1032E2ABF9CFB00257B7B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlotProjectile;
+			productName = PlotProjectile;
+			productReference = 07B103302ABF9CFB00257B7B /* PlotProjectile */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -212,6 +276,9 @@
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = 07B102F12ABA968500257B7B;
 					};
+					07B1032F2ABF9CFB00257B7B = {
+						CreatedOnToolsVersion = 15.0;
+					};
 				};
 			};
 			buildConfigurationList = 07B102ED2ABA968500257B7B /* Build configuration list for PBXProject "The Ray Tracer Challenge" */;
@@ -230,6 +297,7 @@
 				07B102F12ABA968500257B7B /* The Ray Tracer Challenge */,
 				07B103022ABA968600257B7B /* The Ray Tracer ChallengeTests */,
 				07B1030C2ABA968600257B7B /* The Ray Tracer ChallengeUITests */,
+				07B1032F2ABF9CFB00257B7B /* PlotProjectile */,
 			);
 		};
 /* End PBXProject section */
@@ -266,7 +334,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B102F82ABA968500257B7B /* ContentView.swift in Sources */,
+				07B103272ABD345200257B7B /* Color.swift in Sources */,
 				07B103232ABBDCE000257B7B /* Tuple.swift in Sources */,
+				07B1032B2ABE65C600257B7B /* Canvas.swift in Sources */,
 				07B102F62ABA968500257B7B /* The_Ray_Tracer_ChallengeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +346,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B103212ABBD84700257B7B /* TupleTests.swift in Sources */,
+				07B103252ABD32E700257B7B /* ColorTests.swift in Sources */,
 				07B103082ABA968600257B7B /* The_Ray_Tracer_ChallengeTests.swift in Sources */,
+				07B103292ABE63ED00257B7B /* CanvasTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +358,17 @@
 			files = (
 				07B103142ABA968600257B7B /* The_Ray_Tracer_ChallengeUITestsLaunchTests.swift in Sources */,
 				07B103122ABA968600257B7B /* The_Ray_Tracer_ChallengeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07B1032C2ABF9CFB00257B7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07B103372ABF9D6200257B7B /* Tuple.swift in Sources */,
+				07B103392ABF9ED600257B7B /* Color.swift in Sources */,
+				07B103332ABF9CFB00257B7B /* main.swift in Sources */,
+				07B103382ABF9E5200257B7B /* Canvas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +632,28 @@
 			};
 			name = Release;
 		};
+		07B103342ABF9CFB00257B7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L9B8KTP33;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		07B103352ABF9CFB00257B7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L9B8KTP33;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -584,6 +689,15 @@
 			buildConfigurations = (
 				07B1031E2ABA968600257B7B /* Debug */,
 				07B1031F2ABA968600257B7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07B103362ABF9CFB00257B7B /* Build configuration list for PBXNativeTarget "PlotProjectile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07B103342ABF9CFB00257B7B /* Debug */,
+				07B103352ABF9CFB00257B7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
