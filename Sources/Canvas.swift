@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Canvas {
-    let width: Int
-    let height: Int
+public struct Canvas {
+    public let width: Int
+    public let height: Int
     private var pixels: [[Color]]
     
-    init(width: Int, height: Int) {
+    public init(width: Int, height: Int) {
         self.width = width
         self.height = height
         self.pixels = Array<Array<Color>>(repeating: Array<Color>(repeating: Color(r: 0, g: 0, b: 0), count: width), count: height)
     }
     
-    mutating func write(x: Int, y: Int, color: Color) {
+    public mutating func write(x: Int, y: Int, color: Color) {
         guard x >= 0 && x < width && y >= 0 && y < height else {
             return
         }
@@ -29,7 +29,7 @@ struct Canvas {
         pixels[y][x]
     }
     
-    func ppm() -> String {
+    public func ppm() -> String {
         var result = "P3\n\(width) \(height)\n255\n"
         for row in pixels {
             var values = [Int]()
