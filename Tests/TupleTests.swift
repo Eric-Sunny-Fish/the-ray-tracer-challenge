@@ -6,11 +6,9 @@
 //
 
 import XCTest
-@testable import The_Ray_Tracer_Challenge
-
+@testable import TheRayTracerChallenge
 
 final class TupleTests: XCTestCase {
-
 
     func testTuplePoint() throws {
         // Scenario: A tuple with w = 1.0 is a point
@@ -69,7 +67,10 @@ final class TupleTests: XCTestCase {
     func testTupleEqualityPrecision() {
         let precisonFactor = Double(1e10)
         let a = Tuple.point(4/precisonFactor, 5/precisonFactor, 6/precisonFactor)
-        let b = Tuple.point(2/precisonFactor + 2/precisonFactor, 2/precisonFactor + 3/precisonFactor, 2/precisonFactor + 4/precisonFactor)
+        let b = Tuple.point(
+            2/precisonFactor + 2/precisonFactor,
+            2/precisonFactor + 3/precisonFactor,
+            2/precisonFactor + 4/precisonFactor)
         XCTAssert(a == b)
     }
     

@@ -6,17 +6,9 @@
 //
 
 import XCTest
-@testable import The_Ray_Tracer_Challenge
+@testable import TheRayTracerChallenge
 
 final class CanvasTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     func testCreatingCanvas() {
         let c = Canvas(width: 10, height: 20)
@@ -41,7 +33,7 @@ final class CanvasTests: XCTestCase {
         let c = Canvas(width: 5, height: 3)
         let ppm = c.ppm()
         var lines = [String]()
-        ppm.enumerateLines { line, stop in
+        ppm.enumerateLines { line, _ in
             lines.append(line)
         }
         XCTAssert(lines[0] == "P3")
@@ -59,7 +51,7 @@ final class CanvasTests: XCTestCase {
         c.write(x: 4, y: 2, color: c3)
         let ppm = c.ppm()
         var lines = [String]()
-        ppm.enumerateLines { line, stop in
+        ppm.enumerateLines { line, _ in
             lines.append(line)
         }
         XCTAssert(lines[3] == "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", "Line 3: \(lines[3])")
@@ -77,17 +69,23 @@ final class CanvasTests: XCTestCase {
         }
         let ppm = c.ppm()
         var lines = [String]()
-        ppm.enumerateLines { line, stop in
+        ppm.enumerateLines { line, _ in
             lines.append(line)
         }
-        XCTAssert(lines[3] == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", "Line 3: \(lines[3])")
-        XCTAssert(lines[4] == "153 255 204 153 255 204 153 255 204 153 255 204 153", "Line 4: \(lines[4])")
-        XCTAssert(lines[5] == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", "Line 5: \(lines[5])")
+        XCTAssert(
+            lines[3] == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+            "Line 3: \(lines[3])")
+        XCTAssert(
+            lines[4] == "153 255 204 153 255 204 153 255 204 153 255 204 153",
+            "Line 4: \(lines[4])")
+        XCTAssert(
+            lines[5] == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+            "Line 5: \(lines[5])")
         XCTAssert(lines[6] == "153 255 204 153 255 204 153 255 204 153 255 204 153", "Line 6: \(lines[6])")
     }
     
     func testPPMFilesAreTerminatedByANewLineCharacter() {
-        let c = Canvas(width: 5,height: 3)
+        let c = Canvas(width: 5, height: 3)
         let ppm = c.ppm()
         if let last = ppm.last {
             XCTAssert(last == "\n")

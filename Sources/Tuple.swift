@@ -14,25 +14,17 @@ public struct Tuple: Equatable {
     public let z: Double
     public let w: Double
     var isPoint: Bool {
-        get {
             w == 1.0
-        }
     }
     var isVector: Bool {
-        get {
             w == 0.0
-        }
     }
     var magnitude: Double {
-        get {
             sqrt(x * x + y * y + z * z + w * w)
-        }
     }
     public var unit: Tuple {
-        get {
             let m = magnitude
             return Tuple(x / m, y / m, z / m, w / m)
-        }
     }
     
     public init(_ x: Double, _ y: Double, _ z: Double, _ w: Double) {
@@ -59,12 +51,10 @@ public struct Tuple: Equatable {
     }
     
     static var zeroVector: Tuple {
-        get {
             Tuple.vector(0, 0, 0)
-        }
     }
     
-    static prefix func -(tuple: Tuple) -> Tuple {
+    static prefix func - (tuple: Tuple) -> Tuple {
         return Tuple(-tuple.x, -tuple.y, -tuple.z, -tuple.w)
     }
 
@@ -83,7 +73,6 @@ public struct Tuple: Equatable {
             lhs.x * rhs.y - lhs.y * rhs.x
         )
     }
-
 
     public static func / (lhs: Tuple, rhs: Double) -> Tuple {
         Tuple(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs)

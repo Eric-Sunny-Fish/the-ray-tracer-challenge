@@ -6,17 +6,9 @@
 //
 
 import XCTest
-@testable import The_Ray_Tracer_Challenge
+@testable import TheRayTracerChallenge
 
 final class ColorTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     func testColor() throws {
         let c = Color(r: -0.5, g: 0.4, b: 1.7)

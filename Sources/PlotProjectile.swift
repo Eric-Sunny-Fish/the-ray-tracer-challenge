@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import The_Ray_Tracer_Challenge
+import TheRayTracerChallenge
 
 struct Projectile {
     var position: Tuple
@@ -46,9 +46,12 @@ class PlotProjectile {
       var c = Canvas(width: 900, height: 500)
       while p.position.y > 0 {
           p = tick(environment: e, projectile: p)
-          c.plotSquare(x: Int(p.position.x), y: c.height - Int(p.position.y), color: Color(r: 0.8, g: 0.4, b: 0.4))
+          c.plotSquare(
+            x: Int(p.position.x),
+            y: c.height - Int(p.position.y),
+            color: Color(r: 0.8, g: 0.4, b: 0.4)
+          )
       }
       print(c.ppm())
   }
 }
-

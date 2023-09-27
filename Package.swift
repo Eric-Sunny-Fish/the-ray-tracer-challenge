@@ -4,28 +4,38 @@
 import PackageDescription
 
 let package = Package(
-    name: "The Ray Tracer Challenge",
+    name: "TheRayTracerChallenge",
+    platforms: [.macOS(.v14)],
+    dependencies: [
+        .package(
+            url: "https://github.com/realm/SwiftLint",
+            from: "0.53.0")
+    ],
     targets: [
         .target(
-            name: "The Ray Tracer Challenge",
+            name: "TheRayTracerChallenge",
             path: "Sources",
             sources: [
                 "Canvas.swift",
                 "Color.swift",
                 "Tuple.swift"
-            ]),
+            ],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        ),
         .executableTarget(
             name: "Tracer",
-            dependencies: ["The Ray Tracer Challenge"],
+            dependencies: ["TheRayTracerChallenge"],
             path: "Sources",
             sources: ["main.swift"]),
         .executableTarget(
             name: "Plot Projectile", 
-            dependencies: ["The Ray Tracer Challenge"],
+            dependencies: ["TheRayTracerChallenge"],
             path: "Sources",
-            sources: ["PlotProjectile.swift"]),
+            sources: ["PlotProjectile.swift"],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]),
         .testTarget(
-            name: "The Ray Tracer Chalenge Tests", 
-            dependencies: ["The Ray Tracer Challenge"])
+            name: "TheRayTracerChalengeTests", 
+            dependencies: ["TheRayTracerChallenge"],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")])
     ]
 )

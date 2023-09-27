@@ -15,7 +15,9 @@ public struct Canvas {
     public init(width: Int, height: Int) {
         self.width = width
         self.height = height
-        self.pixels = Array<Array<Color>>(repeating: Array<Color>(repeating: Color(r: 0, g: 0, b: 0), count: width), count: height)
+        self.pixels = [[Color]](
+            repeating: [Color](repeating: Color(r: 0, g: 0, b: 0), count: width),
+            count: height)
     }
     
     public mutating func write(x: Int, y: Int, color: Color) {
