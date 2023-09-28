@@ -56,4 +56,18 @@ public struct Canvas {
         return result
     }
     
+    public func saveToFile(name: String) {
+        let str = self.ppm()
+        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("Could not save file")
+            return
+        }
+        let filename = path.appendingPathComponent("\(name).ppm")
+        do {
+            try str.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            print("Could not save file")
+        }
+    }
+    
 }

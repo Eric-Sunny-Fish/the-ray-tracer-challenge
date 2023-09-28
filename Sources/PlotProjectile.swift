@@ -49,9 +49,9 @@ class PlotProjectile {
           c.plotSquare(
             x: Int(p.position.x),
             y: c.height - Int(p.position.y),
-            color: Color(r: 0.8, g: 0.4, b: 0.4)
+            color: Color(r: 0.4, g: 0.8, b: 0.4)
           )
       }
-      print(c.ppm())
+      c.saveToFile(name: "PlotProjectile")
   }
 }
