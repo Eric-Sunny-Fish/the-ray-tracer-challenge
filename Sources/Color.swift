@@ -8,40 +8,39 @@
 import Foundation
 
 public struct Color {
-    let r: Double
-    let g: Double
-    let b: Double
+    let red: Double
+    let green: Double
+    let blue: Double
     
-    public init(r: Double, g: Double, b: Double) {
-        self.r = r
-        self.g = g
-        self.b = b
+    public init(red: Double, green: Double, blue: Double) {
+        self.red = red
+        self.green = green
+        self.blue = blue
     }
     
-    static func + (lhs: Color, rhs: Color) -> Color {
-        Color(r: lhs.r + rhs.r, g: lhs.g + rhs.g, b: lhs.b + rhs.b)
+    static func + (lhs: Self, rhs: Self) -> Self {
+        Self(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue)
     }
     
-    public static func - (lhs: Color, rhs: Color) -> Color {
-        Color(r: lhs.r - rhs.r, g: lhs.g - rhs.g, b: lhs.b - rhs.b)
+    public static func - (lhs: Self, rhs: Self) -> Self {
+        Self(red: lhs.red - rhs.red, green: lhs.green - rhs.green, blue: lhs.blue - rhs.blue)
     }
     
-    public static func * (lhs: Color, rhs: Double) -> Color {
-        Color(r: lhs.r * rhs, g: lhs.g * rhs, b: lhs.b * rhs)
+    public static func * (lhs: Self, rhs: Double) -> Self {
+        Self(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs)
     }
     
-    public static func * (lhs: Color, rhs: Color) -> Color {
-        Color(r: lhs.r * rhs.r, g: lhs.g * rhs.g, b: lhs.b * rhs.b)
+    public static func * (lhs: Self, rhs: Self) -> Self {
+        Self(red: lhs.red * rhs.red, green: lhs.green * rhs.green, blue: lhs.blue * rhs.blue)
     }
-
 }
 
 extension Color: Equatable {
     public static func == (lhs: Color, rhs: Color) -> Bool {
         let epsilon = 1e-10
-        let rEqual = abs(lhs.r - rhs.r) < epsilon
-        let gEqual = abs(lhs.g - rhs.g) < epsilon
-        let bEqual = abs(lhs.b - rhs.b) < epsilon
+        let rEqual = abs(lhs.red - rhs.red) < epsilon
+        let gEqual = abs(lhs.green - rhs.green) < epsilon
+        let bEqual = abs(lhs.blue - rhs.blue) < epsilon
         return rEqual && gEqual && bEqual
     }
 }

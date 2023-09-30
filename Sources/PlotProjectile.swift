@@ -4,6 +4,7 @@
 //
 //  Created by Eric Berna on 9/23/23.
 //
+// swiftlint:disable no_magic_numbers
 
 import Foundation
 import TheRayTracerChallenge
@@ -24,6 +25,27 @@ func tick(environment: Environment, projectile: Projectile) -> Projectile {
     return Projectile(position: position, velocity: velocity)
 }
 
+@main
+enum PlotProjectile {
+    static func main() {
+        var projectile = Projectile(
+            position: Tuple.point(0, 1, 0),
+            velocity: Tuple.vector(1, 1.8, 0).unit * 11.25
+        )
+        let environment = Environment(gravity: Tuple.vector(0, -0.1, 0), wind: Tuple.vector(-0.01, 0, 0))
+        var canvas = Canvas(width: 900, height: 500)
+        while projectile.position.y > 0 {
+            projectile = tick(environment: environment, projectile: projectile)
+            canvas.plotSquare(
+                x: Int(projectile.position.x),
+                y: canvas.height - Int(projectile.position.y),
+                color: Color(red: 0.4, green: 0.8, blue: 0.4)
+            )
+        }
+        canvas.saveToFile(name: "PlotProjectile")
+    }
+}
+
 extension Canvas {
     mutating func plotSquare(x: Int, y: Int, color: Color) {
         write(x: x - 1, y: y - 1, color: color)
@@ -37,21 +59,4 @@ extension Canvas {
         write(x: x + 1, y: y + 1, color: color)
     }
 }
-
-@main
-class PlotProjectile {
-  static func main() {
-      var p = Projectile(position: Tuple.point(0, 1, 0), velocity: Tuple.vector(1, 1.8, 0).unit * 11.25)
-      let e = Environment(gravity: Tuple.vector(0, -0.1, 0), wind: Tuple.vector(-0.01, 0, 0))
-      var c = Canvas(width: 900, height: 500)
-      while p.position.y > 0 {
-          p = tick(environment: e, projectile: p)
-          c.plotSquare(
-            x: Int(p.position.x),
-            y: c.height - Int(p.position.y),
-            color: Color(r: 0.4, g: 0.8, b: 0.4)
-          )
-      }
-      c.saveToFile(name: "PlotProjectile")
-  }
-}
+// swiftlint:enable no_magic_numbers

@@ -9,87 +9,95 @@ import XCTest
 @testable import TheRayTracerChallenge
 
 final class CanvasTests: XCTestCase {
-
     func testCreatingCanvas() {
-        let c = Canvas(width: 10, height: 20)
-        XCTAssert(c.width == 10)
-        XCTAssert(c.height == 20)
-        let black = Color(r: 0, g: 0, b: 0)
-        for x in 0..<c.width {
-            for y in 0..<c.height {
-                XCTAssert(c.pixel(x: x, y: y) == black)
+        let canvas = Canvas(width: 10, height: 20)
+        XCTAssertEqual(canvas.width, 10)
+        XCTAssertEqual(canvas.height, 20)
+        let black = Color(red: 0, green: 0, blue: 0)
+        for x in 0..<canvas.width {
+            for y in 0..<canvas.height {
+                XCTAssertEqual(canvas.pixel(x: x, y: y), black)
             }
         }
     }
     
     func testWritePixelToCanvas() {
-        var c = Canvas(width: 10, height: 20)
-        let red = Color(r: 1, g: 0, b: 0)
-        c.write(x: 2, y: 3, color: red)
-        XCTAssert(c.pixel(x: 2, y: 3) == red)
+        var canvas = Canvas(width: 10, height: 20)
+        let red = Color(red: 1, green: 0, blue: 0)
+        canvas.write(x: 2, y: 3, color: red)
+        XCTAssertEqual(canvas.pixel(x: 2, y: 3), red)
     }
 
     func testConstructingThePPMHeader() {
-        let c = Canvas(width: 5, height: 3)
-        let ppm = c.ppm()
+        let canvas = Canvas(width: 5, height: 3)
+        let ppm = canvas.ppm()
         var lines = [String]()
         ppm.enumerateLines { line, _ in
             lines.append(line)
         }
-        XCTAssert(lines[0] == "P3")
-        XCTAssert(lines[1] == "5 3")
-        XCTAssert(lines[2] == "255")
+        XCTAssertEqual(lines[0], "P3")
+        XCTAssertEqual(lines[1], "5 3")
+        XCTAssertEqual(lines[2], "255")
     }
     
     func testConstructingPPMData() {
-        var c = Canvas(width: 5, height: 3)
-        let c1 = Color(r: 1.5, g: 0, b: 0)
-        let c2 = Color(r: 0, g: 0.5, b: 0)
-        let c3 = Color(r: -0.5, g: 0, b: 1)
-        c.write(x: 0, y: 0, color: c1)
-        c.write(x: 2, y: 1, color: c2)
-        c.write(x: 4, y: 2, color: c3)
-        let ppm = c.ppm()
+        var canvas = Canvas(width: 5, height: 3)
+        let color1 = Color(red: 1.5, green: 0, blue: 0)
+        let color2 = Color(red: 0, green: 0.5, blue: 0)
+        let color3 = Color(red: -0.5, green: 0, blue: 1)
+        canvas.write(x: 0, y: 0, color: color1)
+        canvas.write(x: 2, y: 1, color: color2)
+        canvas.write(x: 4, y: 2, color: color3)
+        let ppm = canvas.ppm()
         var lines = [String]()
         ppm.enumerateLines { line, _ in
             lines.append(line)
         }
-        XCTAssert(lines[3] == "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", "Line 3: \(lines[3])")
-        XCTAssert(lines[4] == "0 0 0 0 0 0 0 127 0 0 0 0 0 0 0", "Line 4: \(lines[4])")
-        XCTAssert(lines[5] == "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", "Line 5: \(lines[5])")
+        XCTAssertEqual(lines[3], "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", "Line 3: \(lines[3])")
+        XCTAssertEqual(lines[4], "0 0 0 0 0 0 0 127 0 0 0 0 0 0 0", "Line 4: \(lines[4])")
+        XCTAssertEqual(lines[5], "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", "Line 5: \(lines[5])")
     }
     
     func testSplittingLongLinesInPPMFiles() {
-        var c = Canvas(width: 10, height: 2)
-        let color = Color(r: 1, g: 0.8, b: 0.6)
-        for x in 0..<c.width {
-            for y in 0..<c.height {
-                c.write(x: x, y: y, color: color)
+        var canvas = Canvas(width: 10, height: 2)
+        let color = Color(red: 1, green: 0.8, blue: 0.6)
+        for x in 0..<canvas.width {
+            for y in 0..<canvas.height {
+                canvas.write(x: x, y: y, color: color)
             }
         }
-        let ppm = c.ppm()
+        let ppm = canvas.ppm()
         var lines = [String]()
         ppm.enumerateLines { line, _ in
             lines.append(line)
         }
-        XCTAssert(
-            lines[3] == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
-            "Line 3: \(lines[3])")
-        XCTAssert(
-            lines[4] == "153 255 204 153 255 204 153 255 204 153 255 204 153",
-            "Line 4: \(lines[4])")
-        XCTAssert(
-            lines[5] == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
-            "Line 5: \(lines[5])")
-        XCTAssert(lines[6] == "153 255 204 153 255 204 153 255 204 153 255 204 153", "Line 6: \(lines[6])")
+        XCTAssertEqual(
+            lines[3],
+            "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+            "Line 3: \(lines[3])"
+        )
+        XCTAssertEqual(
+            lines[4], 
+            "153 255 204 153 255 204 153 255 204 153 255 204 153",
+            "Line 4: \(lines[4])"
+        )
+        XCTAssertEqual(
+            lines[5], 
+            "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+            "Line 5: \(lines[5])"
+        )
+        XCTAssertEqual(
+            lines[6],
+            "153 255 204 153 255 204 153 255 204 153 255 204 153",
+            "Line 6: \(lines[6])"
+        )
     }
     
     func testPPMFilesAreTerminatedByANewLineCharacter() {
-        let c = Canvas(width: 5, height: 3)
-        let ppm = c.ppm()
+        let canvas = Canvas(width: 5, height: 3)
+        let ppm = canvas.ppm()
         if let last = ppm.last {
-            XCTAssert(last == "\n")
+            XCTAssertEqual(last, "\n")
         }
     }
-
 }

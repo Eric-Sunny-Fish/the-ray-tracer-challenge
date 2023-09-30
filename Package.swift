@@ -18,6 +18,7 @@ let package = Package(
             sources: [
                 "Canvas.swift",
                 "Color.swift",
+                "Matrix.swift",
                 "Tuple.swift"
             ],
             plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
