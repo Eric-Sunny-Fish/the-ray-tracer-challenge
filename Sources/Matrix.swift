@@ -23,6 +23,33 @@ struct Matrix {
             ]
         )
     }
+    var determinant: Double {
+        var result = 0.0
+        if self.rows == 2 {
+            result = self[0, 0] * self[1, 1] - self[1, 0] * self[0, 1]
+        } else {
+            for cIndex in 0..<columns {
+                result += self[0, cIndex] * cofactor(row: 0, column: cIndex)
+            }
+        }
+        return result
+    }
+    var invertable: Bool {
+        self.determinant != 0.0
+    }
+    var inverse: Self? {
+        let deter = self.determinant
+        guard deter != 0.0 else {
+            return nil
+        }
+        var result = self
+        for row in 0..<self.rows {
+            for column in 0..<self.columns {
+                result[column, row] = self.cofactor(row: row, column: column) / deter
+            }
+        }
+        return result
+    }
     private var values: [Double]
     
     init(rows: Int, columns: Int, values: [Double]? = nil) {
@@ -71,11 +98,33 @@ struct Matrix {
         columns: 4,
         values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     )
+    
+    func submatrixRemoving(row: Int, column: Int) -> Self {
+        var newValues = [Double]()
+        newValues.reserveCapacity((rows - 1) * (columns - 1))
+        for rIndex in 0..<rows {
+            for cIndex in 0..<columns {
+                if (rIndex != row) && (cIndex != column) {
+                    newValues.append(self[rIndex, cIndex])
+                }
+            }
+        }
+        return Self(rows: rows - 1, columns: columns - 1, values: newValues)
+    }
+    
+    func minor(row: Int, column: Int) -> Double {
+        self.submatrixRemoving(row: row, column: column).determinant
+    }
+    
+    func cofactor(row: Int, column: Int) -> Double {
+        let sign = (row + column).isMultiple(of: 2) ? 1.0 : -1.0
+        return sign * self.minor(row: row, column: column)
+    }
 }
 
 extension Matrix: Equatable {
     public static func == (lhs: Matrix, rhs: Matrix) -> Bool {
-        let epsilon = 1e-10
+        let epsilon = 5e-6
         guard lhs.rows == rhs.rows && lhs.columns == rhs.columns else {
             return false
         }

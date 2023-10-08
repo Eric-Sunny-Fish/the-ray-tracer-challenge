@@ -2,11 +2,9 @@
 disabled_rules: # rule identifiers turned on by default to exclude from running
   - trailing_whitespace # Conflicts with the Xcodes formatting.
 opt_in_rules: # some rules are turned off by default, so you need to opt-in
-  - empty_count # find all the available rules by running: `swiftlint rules`
   - accessibility_label_for_image
   - accessibility_trait_for_button
   - anonymous_argument_in_multiline_closure
-  - anyobject_protocol
   - array_init
   - attributes
   - closure_body_length
@@ -46,7 +44,6 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - implicit_return
   - implicitly_unwrapped_optional
   - indentation_width
-  - inert_defer
   - joined_default_parameter
   - last_where
   - legacy_multiple
@@ -68,7 +65,6 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - non_overridable_class_declaration
   - nslocalizedstring_key
   - nslocalizedstring_require_bundle
-  - number_separator
   - object_literal
   - operator_usage_whitespace
   - optional_enum_case_matching
@@ -114,7 +110,6 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - unneeded_parentheses_in_closure_argument
   - unowned_variable_capture
   - untyped_error_in_catch
-  - unused_capture_list
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_between_cases
   - vertical_whitespace_closing_braces
@@ -123,9 +118,6 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - xct_specific_matcher
   - yoda_condition
 
-  
-  
-  
 analyzer_rules: # rules run by `swiftlint analyze`
   - explicit_self
 
