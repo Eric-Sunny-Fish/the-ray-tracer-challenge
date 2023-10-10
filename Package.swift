@@ -9,7 +9,8 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/realm/SwiftLint",
-            from: "0.53.0")
+            from: "0.53.0"
+        )
     ],
     targets: [
         .target(
@@ -19,6 +20,7 @@ let package = Package(
                 "Canvas.swift",
                 "Color.swift",
                 "Matrix.swift",
+                "Transformations.swift",
                 "Tuple.swift"
             ],
             plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
@@ -27,16 +29,26 @@ let package = Package(
             name: "Tracer",
             dependencies: ["TheRayTracerChallenge"],
             path: "Sources",
-            sources: ["main.swift"]),
+            sources: ["main.swift"]
+        ),
         .executableTarget(
             name: "Plot Projectile", 
             dependencies: ["TheRayTracerChallenge"],
             path: "Sources",
             sources: ["PlotProjectile.swift"],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]),
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        ),
+        .executableTarget(
+            name: "ClockFace",
+            dependencies: ["TheRayTracerChallenge"],
+            path: "Sources",
+            sources: ["ClockFace.swift"],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        ),
         .testTarget(
             name: "TheRayTracerChalengeTests", 
             dependencies: ["TheRayTracerChallenge"],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")])
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        )
     ]
 )

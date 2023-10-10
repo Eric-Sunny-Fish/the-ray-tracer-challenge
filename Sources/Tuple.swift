@@ -8,7 +8,7 @@
 import Foundation
 
 infix operator • : MultiplicationPrecedence
-public struct Tuple: Equatable {
+public struct Tuple {
     public let x: Double
     public let y: Double
     public let z: Double
@@ -82,5 +82,14 @@ public struct Tuple: Equatable {
     // swiftlint:disable:next identifier_name
     public static func • (lhs: Self, rhs: Self) -> Double {
         lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w
+    }
+}
+
+extension Tuple: Equatable {
+    public static func == (lhs: Tuple, rhs: Tuple) -> Bool {
+        let epsilon = 5e-6
+        return abs(lhs.x - rhs.x) < epsilon &&
+        abs(lhs.y - rhs.y) < epsilon &&
+        abs(lhs.z - rhs.z) < epsilon
     }
 }

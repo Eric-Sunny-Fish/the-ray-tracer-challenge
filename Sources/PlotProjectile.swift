@@ -46,17 +46,4 @@ enum PlotProjectile {
     }
 }
 
-extension Canvas {
-    mutating func plotSquare(x: Int, y: Int, color: Color) {
-        write(x: x - 1, y: y - 1, color: color)
-        write(x: x - 1, y: y, color: color)
-        write(x: x - 1, y: y + 1, color: color)
-        write(x: x, y: y - 1, color: color)
-        write(x: x, y: y, color: color)
-        write(x: x, y: y + 1, color: color)
-        write(x: x + 1, y: y - 1, color: color)
-        write(x: x + 1, y: y, color: color)
-        write(x: x + 1, y: y + 1, color: color)
-    }
-}
 // swiftlint:enable no_magic_numbers
