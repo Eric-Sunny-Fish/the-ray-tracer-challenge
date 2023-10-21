@@ -5,7 +5,6 @@
 //  Created by Eric Berna on 9/28/23.
 //
 
-// swiftlint:disable no_magic_numbers
 import Foundation
 
 public struct Matrix {
@@ -134,4 +133,3 @@ extension Matrix: Equatable {
         return true
     }
 }
-// swiftlint:enable no_magic_numbers

@@ -5,8 +5,6 @@
 //  Created by Eric Berna on 10/8/23.
 //
 
-// swiftlint:disable no_magic_numbers
-
 import Foundation
 
 extension Matrix {
@@ -72,5 +70,4 @@ extension Matrix {
         return result
     }
 }
-
-// swiftlint:enable no_magic_numbers identifier_name function_parameter_count
+// swiftlint:enable identifier_name function_parameter_count

@@ -66,7 +66,7 @@ public struct Canvas {
             print("Could not save file")
             return
         }
-        let filename = path.appendingPathComponent("\(name).ppm")
+        let filename = path.appendingPathComponent("RTCImages/\(name).ppm")
         do {
             try string.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
         } catch {

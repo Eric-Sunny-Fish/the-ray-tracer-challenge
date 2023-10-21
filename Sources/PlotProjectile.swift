@@ -4,7 +4,6 @@
 //
 //  Created by Eric Berna on 9/23/23.
 //
-// swiftlint:disable no_magic_numbers
 
 import Foundation
 import TheRayTracerChallenge
@@ -45,5 +44,3 @@ enum PlotProjectile {
         canvas.saveToFile(name: "PlotProjectile")
     }
 }
-
-// swiftlint:enable no_magic_numbers

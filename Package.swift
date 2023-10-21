@@ -19,7 +19,10 @@ let package = Package(
             sources: [
                 "Canvas.swift",
                 "Color.swift",
+                "Intersection.swift",
                 "Matrix.swift",
+                "Ray.swift",
+                "Object.swift",
                 "Transformations.swift",
                 "Tuple.swift"
             ],
@@ -43,6 +46,13 @@ let package = Package(
             dependencies: ["TheRayTracerChallenge"],
             path: "Sources",
             sources: ["ClockFace.swift"],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        ),
+        .executableTarget(
+            name: "FlatSphere",
+            dependencies: ["TheRayTracerChallenge"],
+            path: "Sources",
+            sources: ["FlatSphere.swift"],
             plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         ),
         .testTarget(

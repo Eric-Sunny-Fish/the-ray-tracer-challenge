@@ -4,7 +4,6 @@
 //
 //  Created by Eric Berna on 10/9/23.
 //
-// swiftlint:disable no_magic_numbers
 
 import Foundation
 import TheRayTracerChallenge
@@ -31,5 +30,3 @@ enum ClockFace {
         canvas.saveToFile(name: "ClockFace")
     }
 }
-
-// swiftlint:enable no_magic_numbers

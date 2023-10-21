@@ -61,7 +61,6 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - multiline_parameters_brackets
   - nimble_operator
   - no_extension_access_modifier
-  - no_magic_numbers
   - non_overridable_class_declaration
   - nslocalizedstring_key
   - nslocalizedstring_require_bundle
@@ -155,7 +154,7 @@ file_length:
 # naming rules can set warnings/errors for min_length and max_length
 # additionally they can set excluded names
 type_name:
-  min_length: 4 # only warning
+  min_length: 3 # only warning
   max_length: # warning and error
     warning: 40
     error: 50
