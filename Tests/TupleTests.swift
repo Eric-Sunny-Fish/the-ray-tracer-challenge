@@ -199,4 +199,20 @@ final class TupleTests: XCTestCase {
         }
         print("Ticks: \(ticks)")
     }
+    
+    func testReflectingVectorNear45() {
+        let vector = Tuple.vector(1, -1, 0)
+        let normal = Tuple.vector(0, 1, 0)
+        let reflection = vector.reflect(around: normal)
+        let expected = Tuple.vector(1, 1, 0)
+        XCTAssertEqual(reflection, expected)
+    }
+    
+    func testReflectingVectorOffSlantedSurface() {
+        let vector = Tuple.vector(0, -1, 0)
+        let normal = Tuple.vector(sqrt(2) / 2, sqrt(2) / 2, 0)
+        let reflection = vector.reflect(around: normal)
+        let expected = Tuple.vector(1, 0, 0)
+        XCTAssertEqual(reflection, expected)
+    }
 }

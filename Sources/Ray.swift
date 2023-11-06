@@ -9,14 +9,14 @@ import Foundation
 
 public struct Ray: Equatable {
     let origin: Tuple
-    let direction: Tuple
+    public let direction: Tuple
     
     public init(origin: Tuple, direction: Tuple) {
         self.origin = origin
         self.direction = direction
     }
     
-    func position(time: Double) -> Tuple {
+    public func position(time: Double) -> Tuple {
         origin + (direction * time)
     }
     

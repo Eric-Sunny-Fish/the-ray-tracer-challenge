@@ -8,8 +8,8 @@
 import Foundation
 
 public struct Intersection: Equatable {
-    let time: Double
-    let object: Sphere
+    public let time: Double
+    public let object: Sphere
     
     public static func intersections(_ ints: Self...) -> [Self] {
         Array(ints)

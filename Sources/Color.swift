@@ -18,6 +18,10 @@ public struct Color {
         self.blue = blue
     }
     
+    public static var black: Self {
+        Self(red: 0, green: 0, blue: 0)
+    }
+    
     static func + (lhs: Self, rhs: Self) -> Self {
         Self(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue)
     }
@@ -37,7 +41,7 @@ public struct Color {
 
 extension Color: Equatable {
     public static func == (lhs: Color, rhs: Color) -> Bool {
-        let epsilon = 1e-10
+        let epsilon = 1e-5
         let rEqual = abs(lhs.red - rhs.red) < epsilon
         let gEqual = abs(lhs.green - rhs.green) < epsilon
         let bEqual = abs(lhs.blue - rhs.blue) < epsilon

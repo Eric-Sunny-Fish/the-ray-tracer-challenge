@@ -23,8 +23,9 @@ public struct Tuple {
         sqrt(x * x + y * y + z * z + w * w)
     }
     public var unit: Self {
-        let mag = magnitude
-        return Self(x / mag, y / mag, z / mag, w / mag)
+        let vector = Self.vector(self.x, self.y, self.z)
+        let mag = vector.magnitude
+        return Self(x / mag, y / mag, z / mag, 0)
     }
     
     public init(_ x: Double, _ y: Double, _ z: Double, _ w: Double) {
@@ -90,6 +91,11 @@ extension Tuple: Equatable {
         let epsilon = 5e-6
         return abs(lhs.x - rhs.x) < epsilon &&
         abs(lhs.y - rhs.y) < epsilon &&
-        abs(lhs.z - rhs.z) < epsilon
+        abs(lhs.z - rhs.z) < epsilon &&
+        abs(lhs.w - rhs.w) < epsilon
+    }
+    
+    func reflect(around normal: Tuple) -> Tuple {
+        self - normal * 2 * (self • normal)
     }
 }
