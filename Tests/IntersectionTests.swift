@@ -72,7 +72,7 @@ final class IntersectionTests: XCTestCase {
     func testIntersectScaledSphere() {
         let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere(transform: .scale(2, 2, 2))
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 2)
         XCTAssertEqual(intersections[0].time, 3)
         XCTAssertEqual(intersections[1].time, 7)
@@ -81,7 +81,42 @@ final class IntersectionTests: XCTestCase {
     func testIntersectTranslatedSphere() {
         let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere(transform: .translation(5, 0, 0))
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 0)
+    }
+    
+    func testPrecomputingIntersectionState() {
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
+        let shape = Sphere()
+        let intersections = ray.intersects(sphere: shape)
+        XCTAssertEqual(intersections.count, 2)
+        XCTAssertEqual(intersections[0].time, 4)
+        XCTAssertEqual(intersections[0].object, shape)
+        XCTAssertEqual(intersections[0].point, Tuple.point(0, 0, -1))
+        XCTAssertEqual(intersections[0].eyev, Tuple.vector(0, 0, -1))
+        XCTAssertEqual(intersections[0].normalv, Tuple.vector(0, 0, -1))
+    }
+    
+    func testIntersectFromOutside() {
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
+        let shape = Sphere()
+        let intersections = ray.intersects(sphere: shape)
+        let first = intersections[0]
+        XCTAssertFalse(first.inside)
+    }
+    
+    func testIntersectFromInside() {
+        let ray = Ray(origin: Tuple.point(0, 0, 0), direction: Tuple.vector(0, 0, 1))
+        let shape = Sphere()
+        let intersections = ray.intersects(sphere: shape)
+        let first = intersections.first { $0.time == 1 }
+        guard let first else {
+            XCTFail("Unable to find intersection")
+            return
+        }
+        XCTAssertTrue(first.inside)
+        XCTAssertEqual(first.point, Tuple.point(0, 0, 1))
+        XCTAssertEqual(first.eyev, Tuple.vector(0, 0, -1))
+        XCTAssertEqual(first.normalv, Tuple.vector(0, 0, -1))
     }
 }

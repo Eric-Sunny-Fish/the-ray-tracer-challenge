@@ -20,7 +20,7 @@ public struct Ray: Equatable {
         origin + (direction * time)
     }
     
-    public func intersects(_ sphere: Sphere) -> [Intersection] {
+    public func intersects(sphere: Sphere) -> [Intersection] {
         guard let inverse = sphere.transform.inverse else {
             return []
         }
@@ -35,9 +35,47 @@ public struct Ray: Equatable {
         }
         let time1 = (-quadB - sqrt(discriminant)) / (2.0 * quadA)
         let time2 = (-quadB + sqrt(discriminant)) / (2.0 * quadA)
-        let int1 = Intersection(time: time1, object: sphere)
-        let int2 = Intersection(time: time2, object: sphere)
+        let point1 = self.position(time: time1)
+        let point2 = self.position(time: time2)
+        let eyev = -self.direction
+        var normalv1 = sphere.normal(at: point1)
+        var normalv2 = sphere.normal(at: point2)
+        var inside1 = false
+        var inside2 = false
+        if (normalv1 • eyev) < 0 {
+            inside1 = true
+            normalv1 = -normalv1
+        }
+        if (normalv2 • eyev) < 0 {
+            inside2 = true
+            normalv2 = -normalv2
+        }
+        let int1 = Intersection(
+            time: time1,
+            object: sphere,
+            point: point1,
+            eyev: eyev,
+            normalv: normalv1,
+            inside: inside1
+        )
+        let int2 = Intersection(
+            time: time2,
+            object: sphere,
+            point: point2,
+            eyev: eyev,
+            normalv: normalv2,
+            inside: inside2
+        )
         return [int1, int2]
+    }
+    
+    public func intersects(world: World) -> [Intersection] {
+        var result = [Intersection]()
+        for sphere in world.objects {
+            result += self.intersects(sphere: sphere)
+        }
+        result.sort { $0.time < $1.time }
+        return result
     }
     
     func transform(by matrix: Matrix) -> Self {

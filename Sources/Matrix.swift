@@ -119,6 +119,36 @@ public struct Matrix {
         let sign = (row + column).isMultiple(of: 2) ? 1.0 : -1.0
         return sign * self.minor(row: row, column: column)
     }
+    
+    // swiftlint:disable:next identifier_name
+    public static func viewTransform(from: Tuple, to: Tuple, up: Tuple) -> Self {
+        let forward = (to - from).unit
+        let left = forward * up.unit
+        let trueUp = left * forward
+        let result = Self(
+            rows: 4,
+            columns: 4,
+            values: [
+                left.x,
+                left.y,
+                left.z,
+                0,
+                trueUp.x,
+                trueUp.y,
+                trueUp.z,
+                0,
+                -forward.x,
+                -forward.y,
+                -forward.z,
+                0,
+                0,
+                0,
+                0,
+                1
+            ]
+        )
+        return result * Self.translation(-from.x, -from.y, -from.z)
+    }
 }
 
 extension Matrix: Equatable {

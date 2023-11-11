@@ -1,5 +1,5 @@
 //
-//  Object.swift
+//  RTObject.swift
 //
 //
 //  Created by Eric Berna on 10/19/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Sphere: Object {
+public struct Sphere: RTObject {
     public var transform: Matrix
     public var material: Material
     let center: Tuple
@@ -37,7 +37,7 @@ public struct Sphere: Object {
     }
 }
 
-public protocol Object: Equatable {
+public protocol RTObject: Equatable {
     var transform: Matrix { get set }
     var material: Material { get set }
 }

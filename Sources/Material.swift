@@ -9,7 +9,7 @@ import Foundation
 
 public struct Material: Equatable {
     let color: Color
-    let ambient: Double
+    var ambient: Double
     let diffuse: Double
     let specular: Double
     let shininess: Double

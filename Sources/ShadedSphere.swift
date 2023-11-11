@@ -28,7 +28,7 @@ enum FlatSphere {
             for column in 0..<kCanvasSize {
                 let worldX = -kHalf + pixelSize * Double(column)
                 let ray = Ray(origin: kOrigin, direction: Tuple.vector(worldX, worldY, kWallPosition).unit)
-                let hit = ray.intersects(kSphere).hit()
+                let hit = ray.intersects(sphere: kSphere).hit()
                 if let hit {
                     let point = ray.position(time: hit.time)
                     let normal = hit.object.normal(at: point)

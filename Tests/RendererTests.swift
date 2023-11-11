@@ -97,4 +97,66 @@ final class RendererTests: XCTestCase {
         let expected = Color(red: 0.1, green: 0.1, blue: 0.1)
         XCTAssertEqual(litColor, expected)
     }
+    
+    func testShadingIntersection() {
+        let world = World.standard()
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
+        let intersections = ray.intersects(world: world)
+        let shape = world.objects[0]
+        let intersection = intersections.first { $0.time == 4 && $0.object == shape }
+        guard let intersection else {
+            XCTFail("Could not find intersection.")
+            return
+        }
+        let color = Renderer.shadeHit(world: world, intersection: intersection)
+        let expected = Color(red: 0.38066, green: 0.47583, blue: 0.2855)
+        XCTAssertEqual(color, expected)
+    }
+    
+    func testShadingInsideIntersection() {
+        var world = World.standard()
+        world.lights = [
+            Light.point(
+                position: Tuple.point(0, 0.25, 0),
+                intensity: Color(red: 1, green: 1, blue: 1)
+            )
+        ]
+        let ray = Ray(origin: Tuple.point(0, 0, 0), direction: Tuple.vector(0, 0, 1))
+        let intersections = ray.intersects(world: world)
+        let shape = world.objects[1]
+        let intersection = intersections.first { $0.time == 0.5 && $0.object == shape }
+        guard let intersection else {
+            XCTFail("Could not find intersection.")
+            return
+        }
+        let color = Renderer.shadeHit(world: world, intersection: intersection)
+        let expected = Color(red: 0.90498, green: 0.90498, blue: 0.90498)
+        XCTAssertEqual(color, expected)
+    }
+    
+    func testColorWhenRayMisses() {
+        let world = World.standard()
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 1, 0))
+        let color = Renderer.color(world: world, ray: ray)
+        let expected = Color(red: 0, green: 0, blue: 0)
+        XCTAssertEqual(color, expected)
+    }
+    
+    func testColorWhenHits() {
+        let world = World.standard()
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
+        let color = Renderer.color(world: world, ray: ray)
+        let expected = Color(red: 0.38066, green: 0.47583, blue: 0.2855)
+        XCTAssertEqual(color, expected)
+    }
+    
+    func testColorWhenHitsBehindRay() {
+        var world = World.standard()
+        world.objects[0].material.ambient = 1
+        world.objects[1].material.ambient = 1
+        let ray = Ray(origin: Tuple.point(0, 0, 0.75), direction: Tuple.vector(0, 0, -1))
+        let color = Renderer.color(world: world, ray: ray)
+        let expected = world.objects[1].material.color
+        XCTAssertEqual(color, expected)
+    }
 }

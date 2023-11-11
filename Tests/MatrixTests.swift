@@ -270,4 +270,68 @@ final class MatrixTests: XCTestCase {
         let reverted = matrixC * inverseB
         XCTAssertEqual(reverted, matrixA)
     }
+    
+    func testDefaltViewTransform() {
+        let from = Tuple.point(0, 0, 0)
+        // swiftlint:disable:next identifier_name
+        let to = Tuple.point(0, 0, -1)
+        // swiftlint:disable:next identifier_name
+        let up = Tuple.vector(0, 1, 0)
+        let transform = Matrix.viewTransform(from: from, to: to, up: up)
+        XCTAssertEqual(transform, Matrix.identity)
+    }
+    
+    func testViewTransformLookingBack() {
+        let from = Tuple.point(0, 0, 0)
+        // swiftlint:disable:next identifier_name
+        let to = Tuple.point(0, 0, 1)
+        // swiftlint:disable:next identifier_name
+        let up = Tuple.vector(0, 1, 0)
+        let transform = Matrix.viewTransform(from: from, to: to, up: up)
+        let expected = Matrix.scale(-1, 1, -1)
+        XCTAssertEqual(transform, expected)
+    }
+    
+    func testViewTransformMovesWorld() {
+        let from = Tuple.point(0, 0, 8)
+        // swiftlint:disable:next identifier_name
+        let to = Tuple.point(0, 0, 0)
+        // swiftlint:disable:next identifier_name
+        let up = Tuple.vector(0, 1, 0)
+        let transform = Matrix.viewTransform(from: from, to: to, up: up)
+        let expected = Matrix.translation(0, 0, -8)
+        XCTAssertEqual(transform, expected)
+    }
+    
+    func testArbitraryViewTransform() {
+        let from = Tuple.point(1, 3, 2)
+        // swiftlint:disable:next identifier_name
+        let to = Tuple.point(4, -2, 8)
+        // swiftlint:disable:next identifier_name
+        let up = Tuple.vector(1, 1, 0)
+        let transform = Matrix.viewTransform(from: from, to: to, up: up)
+        let expected = Matrix(
+            rows: 4,
+            columns: 4,
+            values: [
+                -0.50709,
+                0.50709,
+                0.67612,
+                -2.36643,
+                0.76772,
+                0.60609,
+                0.12122,
+                -2.82843,
+                -0.35857,
+                0.59761,
+                -0.71714,
+                0.00000,
+                0.00000,
+                0.00000,
+                0.00000,
+                1.00000
+            ]
+        )
+        XCTAssertEqual(transform, expected)
+    }
 }

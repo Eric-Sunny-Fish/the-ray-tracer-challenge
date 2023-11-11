@@ -51,7 +51,7 @@ public struct Tuple {
         Self(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w)
     }
     
-    static var zeroVector: Self {
+    public static var zeroVector: Self {
         Self.vector(0, 0, 0)
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Light {
+public struct Light: Equatable {
     let position: Tuple
     let intensity: Color
     

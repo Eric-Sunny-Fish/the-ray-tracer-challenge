@@ -36,7 +36,7 @@ final class RayTests: XCTestCase {
     func testRayIntersectsSphereAtTwoPoints() {
         let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere()
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 2)
         XCTAssertEqual(intersections[0].time, 4.0)
         XCTAssertEqual(intersections[1].time, 6.0)
@@ -45,7 +45,7 @@ final class RayTests: XCTestCase {
     func testRayIntersectsSphereAtTanget() {
         let ray = Ray(origin: Tuple.point(0, 1, -5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere()
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 2)
         XCTAssertEqual(intersections[0].time, 5.0)
         XCTAssertEqual(intersections[1].time, 5.0)
@@ -54,14 +54,14 @@ final class RayTests: XCTestCase {
     func testRayMissesSphere() {
         let ray = Ray(origin: Tuple.point(0, 2, -5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere()
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 0)
     }
     
     func testRayOriginatesInsideSphere() {
         let ray = Ray(origin: Tuple.point(0, 0, 0), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere()
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 2)
         XCTAssertEqual(intersections[0].time, -1.0)
         XCTAssertEqual(intersections[1].time, 1.0)
@@ -70,7 +70,7 @@ final class RayTests: XCTestCase {
     func testSphereIsBehindRay() {
         let ray = Ray(origin: Tuple.point(0, 0, 5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere()
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 2)
         XCTAssertEqual(intersections[0].time, -6.0)
         XCTAssertEqual(intersections[1].time, -4.0)
@@ -79,7 +79,7 @@ final class RayTests: XCTestCase {
     func testIntersectionHasObject() {
         let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
         let sphere = Sphere()
-        let intersections = ray.intersects(sphere)
+        let intersections = ray.intersects(sphere: sphere)
         XCTAssertEqual(intersections.count, 2)
         XCTAssertEqual(intersections[0].object, sphere)
         XCTAssertEqual(intersections[1].object, sphere)
@@ -99,5 +99,16 @@ final class RayTests: XCTestCase {
         let ray2 = ray.transform(by: matrix)
         let expected = Ray(origin: Tuple.point(2, 6, 12), direction: Tuple.vector(0, 3, 0))
         XCTAssertEqual(ray2, expected)
+    }
+    
+    func testIntersectWorld() {
+        let world = World.standard()
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
+        let intersections = ray.intersects(world: world)
+        XCTAssertEqual(intersections.count, 4)
+        XCTAssertEqual(intersections[0].time, 4)
+        XCTAssertEqual(intersections[1].time, 4.5)
+        XCTAssertEqual(intersections[2].time, 5.5)
+        XCTAssertEqual(intersections[3].time, 6)
     }
 }

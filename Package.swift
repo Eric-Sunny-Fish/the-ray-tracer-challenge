@@ -17,6 +17,7 @@ let package = Package(
             name: "TheRayTracerChallenge",
             path: "Sources",
             sources: [
+                "Camera.swift",
                 "Canvas.swift",
                 "Color.swift",
                 "Intersection.swift",
@@ -25,9 +26,10 @@ let package = Package(
                 "Matrix.swift",
                 "Ray.swift",
                 "Renderer.swift",
-                "Object.swift",
+                "RTObject.swift",
                 "Transformations.swift",
-                "Tuple.swift"
+                "Tuple.swift",
+                "World.swift"
             ],
             plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         ),
@@ -62,13 +64,20 @@ let package = Package(
         //            sources: ["FlatSphere.swift"],
         //            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         //        ),
-            .executableTarget(
-                name: "ShadedSphere",
-                dependencies: ["TheRayTracerChallenge"],
-                path: "Sources",
-                sources: ["ShadedSphere.swift"],
-                plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
-            ),
+//            .executableTarget(
+//                name: "ShadedSphere",
+//                dependencies: ["TheRayTracerChallenge"],
+//                path: "Sources",
+//                sources: ["ShadedSphere.swift"],
+//                plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+//            ),
+        .executableTarget(
+            name: "MakingAScene",
+            dependencies: ["TheRayTracerChallenge"],
+            path: "Sources",
+            sources: ["MakingAScene.swift"],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        ),
         .testTarget(
             name: "TheRayTracerChalengeTests",
             dependencies: ["TheRayTracerChallenge"],

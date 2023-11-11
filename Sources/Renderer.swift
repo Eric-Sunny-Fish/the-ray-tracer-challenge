@@ -32,4 +32,27 @@ public enum Renderer {
         }
         return ambient + diffuse + specular
     }
+    
+    public static func shadeHit(world: World, intersection: Intersection) -> Color {
+        var result = Color.black
+        for light in world.lights {
+            // swiftlint:disable:next shorthand_operator
+            result = result + Self.lighting(
+                material: intersection.object.material,
+                light: light,
+                position: intersection.point,
+                eyeVector: intersection.eyev,
+                normalVector: intersection.normalv
+            )
+        }
+        return result
+    }
+    
+    public static func color(world: World, ray: Ray) -> Color {
+        let intersections = ray.intersects(world: world)
+        guard let hit = intersections.hit() else {
+            return Color.black
+        }
+        return Self.shadeHit(world: world, intersection: hit)
+    }
 }
