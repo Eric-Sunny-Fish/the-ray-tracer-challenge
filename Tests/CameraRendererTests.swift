@@ -1,6 +1,6 @@
 //
-//  RendererTests.swift
-//  
+//  CameraRendererTests.swift
+//
 //
 //  Created by Eric Berna on 10/21/23.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import TheRayTracerChallenge
 
-final class RendererTests: XCTestCase {
+final class CameraRendererTests: XCTestCase {
     private var material = Material()
     private var position = Tuple.point(0, 0, 0)
     
@@ -21,7 +21,8 @@ final class RendererTests: XCTestCase {
         let eyeVector = Tuple.vector(0, 0, -1)
         let normalVector = Tuple.vector(0, 0, -1)
         let light = Light.point(position: Tuple.point(0, 0, -10), intensity: Color(red: 1, green: 1, blue: 1))
-        let litColor = Renderer.lighting(
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let litColor = camera.lighting(
             material: material,
             light: light,
             position: position,
@@ -36,7 +37,8 @@ final class RendererTests: XCTestCase {
         let eyeVector = Tuple.vector(0, sqrt(2) / 2, -sqrt(2) / 2)
         let normalVector = Tuple.vector(0, 0, -1)
         let light = Light.point(position: Tuple.point(0, 0, -10), intensity: Color(red: 1, green: 1, blue: 1))
-        let litColor = Renderer.lighting(
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let litColor = camera.lighting(
             material: material,
             light: light,
             position: position,
@@ -54,7 +56,8 @@ final class RendererTests: XCTestCase {
             position: Tuple.point(0, 10, -10),
             intensity: Color(red: 1, green: 1, blue: 1)
         )
-        let litColor = Renderer.lighting(
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let litColor = camera.lighting(
             material: material,
             light: light,
             position: position,
@@ -72,7 +75,8 @@ final class RendererTests: XCTestCase {
             position: Tuple.point(0, 10, -10),
             intensity: Color(red: 1, green: 1, blue: 1)
         )
-        let litColor = Renderer.lighting(
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let litColor = camera.lighting(
             material: material,
             light: light,
             position: position,
@@ -87,7 +91,8 @@ final class RendererTests: XCTestCase {
         let eyeVector = Tuple.vector(0, 0, -1)
         let normalVector = Tuple.vector(0, 0, -1)
         let light = Light.point(position: Tuple.point(0, 0, 10), intensity: Color(red: 1, green: 1, blue: 1))
-        let litColor = Renderer.lighting(
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let litColor = camera.lighting(
             material: material,
             light: light,
             position: position,
@@ -108,7 +113,8 @@ final class RendererTests: XCTestCase {
             XCTFail("Could not find intersection.")
             return
         }
-        let color = Renderer.shadeHit(world: world, intersection: intersection)
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let color = camera.shadeHit(world: world, intersection: intersection)
         let expected = Color(red: 0.38066, green: 0.47583, blue: 0.2855)
         XCTAssertEqual(color, expected)
     }
@@ -129,7 +135,8 @@ final class RendererTests: XCTestCase {
             XCTFail("Could not find intersection.")
             return
         }
-        let color = Renderer.shadeHit(world: world, intersection: intersection)
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let color = camera.shadeHit(world: world, intersection: intersection)
         let expected = Color(red: 0.90498, green: 0.90498, blue: 0.90498)
         XCTAssertEqual(color, expected)
     }
@@ -137,7 +144,8 @@ final class RendererTests: XCTestCase {
     func testColorWhenRayMisses() {
         let world = World.standard()
         let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 1, 0))
-        let color = Renderer.color(world: world, ray: ray)
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let color = camera.color(world: world, ray: ray)
         let expected = Color(red: 0, green: 0, blue: 0)
         XCTAssertEqual(color, expected)
     }
@@ -145,7 +153,8 @@ final class RendererTests: XCTestCase {
     func testColorWhenHits() {
         let world = World.standard()
         let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
-        let color = Renderer.color(world: world, ray: ray)
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let color = camera.color(world: world, ray: ray)
         let expected = Color(red: 0.38066, green: 0.47583, blue: 0.2855)
         XCTAssertEqual(color, expected)
     }
@@ -155,7 +164,8 @@ final class RendererTests: XCTestCase {
         world.objects[0].material.ambient = 1
         world.objects[1].material.ambient = 1
         let ray = Ray(origin: Tuple.point(0, 0, 0.75), direction: Tuple.vector(0, 0, -1))
-        let color = Renderer.color(world: world, ray: ray)
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let color = camera.color(world: world, ray: ray)
         let expected = world.objects[1].material.color
         XCTAssertEqual(color, expected)
     }

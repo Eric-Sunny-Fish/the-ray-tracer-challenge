@@ -54,10 +54,58 @@ public struct Camera {
         for y in 0..<vSize {
             for x in 0..<hSize {
                 let ray = rayForPixel(x: x, y: y)
-                let color = Renderer.color(world: world, ray: ray)
+                let color = color(world: world, ray: ray)
                 result.write(x: x, y: y, color: color)
             }
         }
         return result
+    }
+    
+    public func lighting(
+        material: Material,
+        light: Light,
+        position: Tuple,
+        eyeVector: Tuple,
+        normalVector: Tuple
+    ) -> Color {
+        let effectiveColor = material.color * light.intensity
+        let lightVector = (light.position - position).unit
+        let ambient = effectiveColor * material.ambient
+        let lightDotNormal = lightVector • normalVector
+        var diffuse = Color.black
+        var specular = Color.black
+        if lightDotNormal > 0 {
+            diffuse = effectiveColor * material.diffuse * lightDotNormal
+            let reflectVector = -lightVector.reflect(around: normalVector)
+            let reflectDotEye = reflectVector • eyeVector
+            if reflectDotEye > 0 {
+                let factor = pow(reflectDotEye, material.shininess)
+                specular = light.intensity * material.specular * factor
+            }
+        }
+        return ambient + diffuse + specular
+    }
+    
+    public func shadeHit(world: World, intersection: Intersection) -> Color {
+        var result = Color.black
+        for light in world.lights {
+            // swiftlint:disable:next shorthand_operator
+            result = result + lighting(
+                material: intersection.object.material,
+                light: light,
+                position: intersection.point,
+                eyeVector: intersection.eyev,
+                normalVector: intersection.normalv
+            )
+        }
+        return result
+    }
+    
+    public func color(world: World, ray: Ray) -> Color {
+        let intersections = ray.intersects(world: world)
+        guard let hit = intersections.hit() else {
+            return Color.black
+        }
+        return shadeHit(world: world, intersection: hit)
     }
 }
