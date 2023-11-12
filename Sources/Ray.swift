@@ -42,6 +42,8 @@ public struct Ray: Equatable {
         var normalv2 = sphere.normal(at: point2)
         var inside1 = false
         var inside2 = false
+        var overPoint1 = point1 + normalv1 * kEpsilon
+        var overPoint2 = point2 + normalv2 * kEpsilon
         if (normalv1 • eyev) < 0 {
             inside1 = true
             normalv1 = -normalv1
@@ -56,7 +58,8 @@ public struct Ray: Equatable {
             point: point1,
             eyev: eyev,
             normalv: normalv1,
-            inside: inside1
+            inside: inside1,
+            overPoint: overPoint1
         )
         let int2 = Intersection(
             time: time2,
@@ -64,7 +67,8 @@ public struct Ray: Equatable {
             point: point2,
             eyev: eyev,
             normalv: normalv2,
-            inside: inside2
+            inside: inside2,
+            overPoint: overPoint2
         )
         return [int1, int2]
     }

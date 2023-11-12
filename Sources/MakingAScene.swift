@@ -79,7 +79,7 @@ enum MakingAScene {
         // swiftlint:disable:next identifier_name
         let up = Tuple.vector(0, 1, 0)
         let transform = Matrix.viewTransform(from: from, to: to, up: up)
-        let camera = Camera(hSize: 10, vSize: 5, fieldOfView: .pi / 3, transform: transform)
+        let camera = Camera(hSize: 200, vSize: 100, fieldOfView: .pi / 3, transform: transform)
         let image: Canvas = camera.render(world: world)
         image.saveToFile(name: "MakingAScene")
     }

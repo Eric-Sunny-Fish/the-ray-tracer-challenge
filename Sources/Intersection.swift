@@ -14,14 +14,16 @@ public struct Intersection: Equatable {
     public let eyev: Tuple
     public let normalv: Tuple
     public let inside: Bool
+    public let overPoint: Tuple
     
     public init(
         time: Double,
         object: Sphere,
-        point: Tuple = Tuple.point(0, 0, 0),
-        eyev: Tuple = Tuple.zeroVector,
-        normalv: Tuple = Tuple.zeroVector,
-        inside: Bool = false
+        point: Tuple = .point(0, 0, 0),
+        eyev: Tuple = .zeroVector,
+        normalv: Tuple = .zeroVector,
+        inside: Bool = false,
+        overPoint: Tuple = .zeroVector
     ) {
         self.time = time
         self.object = object
@@ -29,6 +31,7 @@ public struct Intersection: Equatable {
         self.eyev = eyev
         self.normalv = normalv
         self.inside = inside
+        self.overPoint = overPoint
     }
     
     public static func intersections(_ ints: Self...) -> [Self] {

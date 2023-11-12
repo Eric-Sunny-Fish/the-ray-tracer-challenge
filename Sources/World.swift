@@ -27,4 +27,19 @@ public struct World {
         let sphere2 = Sphere(transform: Matrix.scale(0.5, 0.5, 0.5))
         return Self(objects: [sphere1, sphere2], lights: [light])
     }
+    
+    public func isShadowed(point: Tuple) -> Bool {
+        var result = false
+        for light in lights {
+            var direction = light.position - point
+            let distance = direction.magnitude
+            direction = direction.unit
+            let ray = Ray(origin: point, direction: direction)
+            let intersections = ray.intersects(world: self)
+            if let hit = intersections.hit(), hit.time < distance {
+                result = true
+            }
+        }
+        return result
+    }
 }

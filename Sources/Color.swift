@@ -41,10 +41,9 @@ public struct Color {
 
 extension Color: Equatable {
     public static func == (lhs: Color, rhs: Color) -> Bool {
-        let epsilon = 1e-5
-        let rEqual = abs(lhs.red - rhs.red) < epsilon
-        let gEqual = abs(lhs.green - rhs.green) < epsilon
-        let bEqual = abs(lhs.blue - rhs.blue) < epsilon
+        let rEqual = abs(lhs.red - rhs.red) < kEpsilon
+        let gEqual = abs(lhs.green - rhs.green) < kEpsilon
+        let bEqual = abs(lhs.blue - rhs.blue) < kEpsilon
         return rEqual && gEqual && bEqual
     }
 }

@@ -66,7 +66,8 @@ public struct Camera {
         light: Light,
         position: Tuple,
         eyeVector: Tuple,
-        normalVector: Tuple
+        normalVector: Tuple,
+        inShadow: Bool = false
     ) -> Color {
         let effectiveColor = material.color * light.intensity
         let lightVector = (light.position - position).unit
@@ -74,7 +75,7 @@ public struct Camera {
         let lightDotNormal = lightVector • normalVector
         var diffuse = Color.black
         var specular = Color.black
-        if lightDotNormal > 0 {
+        if lightDotNormal > 0 && !inShadow {
             diffuse = effectiveColor * material.diffuse * lightDotNormal
             let reflectVector = -lightVector.reflect(around: normalVector)
             let reflectDotEye = reflectVector • eyeVector
@@ -89,13 +90,15 @@ public struct Camera {
     public func shadeHit(world: World, intersection: Intersection) -> Color {
         var result = Color.black
         for light in world.lights {
+            let shadowed = world.isShadowed(point: intersection.overPoint)
             // swiftlint:disable:next shorthand_operator
             result = result + lighting(
                 material: intersection.object.material,
                 light: light,
                 position: intersection.point,
                 eyeVector: intersection.eyev,
-                normalVector: intersection.normalv
+                normalVector: intersection.normalv,
+                inShadow: shadowed
             )
         }
         return result

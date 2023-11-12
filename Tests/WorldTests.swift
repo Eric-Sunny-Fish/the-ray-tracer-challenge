@@ -34,4 +34,28 @@ final class WorldTests: XCTestCase {
             item == sphere2
         })
     }
+    
+    func testOffToSideIsNotShadowed() {
+        let world = World.standard()
+        let point = Tuple.point(0, 10, 0)
+        XCTAssertFalse(world.isShadowed(point: point))
+    }
+    
+    func testBehindIsShadowed() {
+        let world = World.standard()
+        let point = Tuple.point(10, -10, 10)
+        XCTAssertTrue(world.isShadowed(point: point))
+    }
+    
+    func testOtherSideOfLightIsNotShadowed() {
+        let world = World.standard()
+        let point = Tuple.point(-20, 20, -20)
+        XCTAssertFalse(world.isShadowed(point: point))
+    }
+    
+    func testBetweenIsShadowed() {
+        let world = World.standard()
+        let point = Tuple.point(-2, 2, -2)
+        XCTAssertFalse(world.isShadowed(point: point))
+    }
 }

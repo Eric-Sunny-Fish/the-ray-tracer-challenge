@@ -153,11 +153,10 @@ public struct Matrix {
 
 extension Matrix: Equatable {
     public static func == (lhs: Matrix, rhs: Matrix) -> Bool {
-        let epsilon = 5e-6
         guard lhs.rows == rhs.rows && lhs.columns == rhs.columns else {
             return false
         }
-        for (lValue, rValue) in zip(lhs.values, rhs.values) where abs(lValue - rValue) > epsilon {
+        for (lValue, rValue) in zip(lhs.values, rhs.values) where abs(lValue - rValue) > kEpsilon {
             return false
         }
         return true

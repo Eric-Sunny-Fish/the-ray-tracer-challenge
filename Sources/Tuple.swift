@@ -7,6 +7,8 @@
 
 import Foundation
 
+let kEpsilon = 5e-6
+
 infix operator • : MultiplicationPrecedence
 public struct Tuple {
     public let x: Double
@@ -88,11 +90,10 @@ public struct Tuple {
 
 extension Tuple: Equatable {
     public static func == (lhs: Tuple, rhs: Tuple) -> Bool {
-        let epsilon = 5e-6
-        return abs(lhs.x - rhs.x) < epsilon &&
-        abs(lhs.y - rhs.y) < epsilon &&
-        abs(lhs.z - rhs.z) < epsilon &&
-        abs(lhs.w - rhs.w) < epsilon
+        abs(lhs.x - rhs.x) < kEpsilon &&
+        abs(lhs.y - rhs.y) < kEpsilon &&
+        abs(lhs.z - rhs.z) < kEpsilon &&
+        abs(lhs.w - rhs.w) < kEpsilon
     }
     
     func reflect(around normal: Tuple) -> Tuple {

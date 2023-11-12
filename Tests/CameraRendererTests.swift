@@ -123,7 +123,7 @@ final class CameraRendererTests: XCTestCase {
         var world = World.standard()
         world.lights = [
             Light.point(
-                position: Tuple.point(0, 0.25, 0),
+                position: Tuple.point(0, 0.25, -5),
                 intensity: Color(red: 1, green: 1, blue: 1)
             )
         ]
@@ -137,7 +137,34 @@ final class CameraRendererTests: XCTestCase {
         }
         let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
         let color = camera.shadeHit(world: world, intersection: intersection)
-        let expected = Color(red: 0.90498, green: 0.90498, blue: 0.90498)
+        // Once we add shadows this color changes.
+        let expected = Color(red: 0.1, green: 0.1, blue: 0.1)
+        XCTAssertEqual(color, expected)
+    }
+    
+    func testShadePointInShadow() {
+        let lights = [
+            Light.point(
+                position: Tuple.point(0, 0, -10),
+                intensity: Color(red: 1, green: 1, blue: 1)
+            )
+        ]
+        let spheres = [
+            Sphere(),
+            Sphere(transform: .translation(0, 0, 10))
+        ]
+        let world = World(objects: spheres, lights: lights)
+        let ray = Ray(origin: Tuple.point(0, 0, 5), direction: Tuple.vector(0, 0, 1))
+        let intersections = ray.intersects(world: world)
+        let shape = world.objects[1]
+        let intersection = intersections.first { $0.time == 4 && $0.object == shape }
+        guard let intersection else {
+            XCTFail("Could not find intersection.")
+            return
+        }
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let color = camera.shadeHit(world: world, intersection: intersection)
+        let expected = Color(red: 0.1, green: 0.1, blue: 0.1)
         XCTAssertEqual(color, expected)
     }
     
@@ -168,5 +195,22 @@ final class CameraRendererTests: XCTestCase {
         let color = camera.color(world: world, ray: ray)
         let expected = world.objects[1].material.color
         XCTAssertEqual(color, expected)
+    }
+    
+    func testLightingWithSurfaceInShadow() {
+        let eyeVector = Tuple.vector(0, 0, -1)
+        let normalVector = Tuple.vector(0, 0, -1)
+        let light = Light.point(position: Tuple.point(0, 0, -10), intensity: Color(red: 1, green: 1, blue: 1))
+        let camera = Camera(hSize: 200, vSize: 125, fieldOfView: .pi / 2)
+        let litColor = camera.lighting(
+            material: material,
+            light: light,
+            position: position,
+            eyeVector: eyeVector,
+            normalVector: normalVector,
+            inShadow: true
+        )
+        let expected = Color(red: 0.1, green: 0.1, blue: 0.1)
+        XCTAssertEqual(litColor, expected)
     }
 }

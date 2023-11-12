@@ -119,4 +119,17 @@ final class IntersectionTests: XCTestCase {
         XCTAssertEqual(first.eyev, Tuple.vector(0, 0, -1))
         XCTAssertEqual(first.normalv, Tuple.vector(0, 0, -1))
     }
+    
+    func testIntersectShouldOffsetPoint() {
+        let ray = Ray(origin: Tuple.point(0, 0, -5), direction: Tuple.vector(0, 0, 1))
+        let shape = Sphere(transform: .translation(0, 0, 1))
+        let intersections = ray.intersects(sphere: shape)
+        let intersection = intersections.first { $0.time == 5 }
+        guard let intersection else {
+            XCTFail("Unable to find intersection")
+            return
+        }
+        XCTAssertLessThan(intersection.overPoint.z, -kEpsilon / 2)
+        XCTAssertGreaterThan(intersection.point.z, intersection.overPoint.z)
+    }
 }
